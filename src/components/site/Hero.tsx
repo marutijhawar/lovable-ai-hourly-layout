@@ -98,7 +98,7 @@ const Hero = ({ model, setModel, hours, setHours, perHour, total, onStart }: Her
                   Start for ${perHour.toFixed(2)}/hr
                 </Button>
                 <a href="#compare">
-                  <Button variant="outline" size="lg">Compare models</Button>
+                  <Button variant="outline" size="lg" className="hover-scale">Compare models</Button>
                 </a>
               </div>
             </div>
