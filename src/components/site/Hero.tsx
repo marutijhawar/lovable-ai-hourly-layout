@@ -83,7 +83,7 @@ const Hero = ({ model, setModel, hours, setHours, perHour, total, onStart }: Her
                   max={20}
                   value={hours}
                   onChange={(e) => setHours(Math.max(1, Math.min(20, Number(e.target.value) || 1)))}
-                  className="w-20 text-center"
+                  className="w-24 text-center bg-background/90 text-foreground shadow-sm backdrop-blur-sm"
                   aria-label="Hours"
                 />
               </div>
