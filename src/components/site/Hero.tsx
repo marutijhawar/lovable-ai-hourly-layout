@@ -19,6 +19,8 @@ interface HeroProps {
 const Hero = ({ model, setModel, hours, setHours, perHour, total, onStart }: HeroProps) => {
   const { toast } = useToast();
 
+  const gradientVar = model === "openai" ? "var(--gradient-openai)" : model === "claude" ? "var(--gradient-claude)" : "var(--gradient-both)";
+
   const handleStart = () => {
     toast({
       title: "Starting hourly access",
@@ -28,7 +30,7 @@ const Hero = ({ model, setModel, hours, setHours, perHour, total, onStart }: Her
   };
 
   return (
-    <section className="relative overflow-hidden border-b">
+    <section className="relative overflow-hidden border-b" style={{ background: gradientVar }}>
       {/* Ambient gradient */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -top-24 right-[-10%] h-72 w-72 rounded-full blur-3xl" style={{ background: "var(--gradient-primary)" }} />
@@ -36,7 +38,7 @@ const Hero = ({ model, setModel, hours, setHours, perHour, total, onStart }: Her
       </div>
 
       <div className="container mx-auto py-16 md:py-24">
-        <div className="mx-auto max-w-3xl text-center animate-fade-in">
+        <div className="mx-auto max-w-3xl text-center animate-fade-in text-primary-foreground">
           <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">
             Hourly AI access to OpenAI and Claude—no commitments.
           </h1>
@@ -44,7 +46,7 @@ const Hero = ({ model, setModel, hours, setHours, perHour, total, onStart }: Her
             Pay only for the time you use. Switch models anytime with transparent pricing.
           </p>
 
-          <div className="mt-8 grid gap-4 rounded-lg border bg-card/50 p-4 md:p-6">
+          <div className="mt-8 grid gap-4 rounded-lg glass-card p-4 md:p-6">
             <div className="flex flex-col items-center justify-center gap-3 md:flex-row">
               <ToggleGroup
                 type="single"
@@ -92,7 +94,7 @@ const Hero = ({ model, setModel, hours, setHours, perHour, total, onStart }: Her
                 Est. total: <span className="font-medium text-foreground">${total.toFixed(2)}</span> • Rate: ${perHour.toFixed(2)}/hr
               </div>
               <div className="flex gap-3">
-                <Button variant="accent" size="lg" className="hover-scale" onClick={handleStart}>
+                <Button variant="gradient" size="lg" className="hover-scale" onClick={handleStart}>
                   Start for ${perHour.toFixed(2)}/hr
                 </Button>
                 <a href="#compare">

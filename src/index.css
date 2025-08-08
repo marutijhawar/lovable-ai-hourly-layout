@@ -55,6 +55,14 @@ All colors MUST be HSL.
     --sidebar-ring: 217.2 91.2% 59.8%;
 
     /* Design tokens */
+    --brand-openai: 0 0% 6%;
+    --brand-claude: 28 95% 54%;
+    /* Brand gradients */
+    --gradient-brand: linear-gradient(135deg, hsl(var(--brand-openai)), hsl(var(--brand-claude)));
+    --gradient-openai: linear-gradient(135deg, hsl(var(--brand-openai)), hsl(var(--brand-claude) / 0.65));
+    --gradient-claude: linear-gradient(135deg, hsl(var(--brand-claude)), hsl(var(--brand-openai) / 0.65));
+    --gradient-both: linear-gradient(135deg, hsl(var(--brand-openai)), hsl(var(--brand-claude)));
+    /* Existing tokens */
     --gradient-primary: linear-gradient(135deg, hsl(var(--accent) / 0.15), hsl(var(--accent) / 0.05));
     --shadow-elevated: 0 6px 24px -8px hsl(var(--accent) / 0.25);
     --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -133,4 +141,36 @@ All colors MUST be HSL.
     transform: scaleX(1);
     transform-origin: bottom left;
   }
+
+  /* Brand gradient utilities */
+  .bg-gradient-brand { background: var(--gradient-brand); }
+  .bg-gradient-openai { background: var(--gradient-openai); }
+  .bg-gradient-claude { background: var(--gradient-claude); }
+  .bg-gradient-both { background: var(--gradient-both); }
+
+  /* Gradient text utility */
+  .text-gradient-brand {
+    background: var(--gradient-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Glass card utility */
+  .glass-card {
+    background: linear-gradient(180deg, hsl(var(--background) / 0.65), hsl(var(--background) / 0.45));
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(var(--border) / 0.5);
+    box-shadow: var(--shadow-elevated);
+    border-radius: var(--radius);
+  }
+
+  /* Button gradient helper used by button variant */
+  .btn-gradient {
+    background: var(--gradient-brand);
+    color: hsl(var(--primary-foreground));
+  }
+  .btn-gradient:hover { filter: brightness(1.05); }
+}
 }

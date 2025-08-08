@@ -25,7 +25,7 @@ const RateSelector = ({ model, setModel, hours, setHours, perHour, total, onStar
           <p className="mt-2 text-muted-foreground">Set your hours and model. Pause anytime. Billed to the minute.</p>
         </div>
 
-        <div className="mx-auto max-w-3xl rounded-lg border bg-card p-6">
+        <div className="mx-auto max-w-3xl rounded-lg glass-card p-6">
           <div className="flex flex-col items-center gap-6">
             <ToggleGroup type="single" value={model} onValueChange={(v) => v && setModel(v as ModelOption)}>
               <ToggleGroupItem value="openai">OpenAI</ToggleGroupItem>
@@ -63,7 +63,7 @@ const RateSelector = ({ model, setModel, hours, setHours, perHour, total, onStar
               <div className="text-sm text-muted-foreground">
                 Rate: <span className="font-medium text-foreground">${perHour.toFixed(2)}/hr</span> • Est. total: <span className="font-medium text-foreground">${total.toFixed(2)}</span>
               </div>
-              <Button variant="accent" size="lg" className="hover-scale" onClick={onStart}>Start now</Button>
+              <Button variant="gradient" size="lg" className="hover-scale" onClick={onStart}>Start now</Button>
             </div>
           </div>
         </div>

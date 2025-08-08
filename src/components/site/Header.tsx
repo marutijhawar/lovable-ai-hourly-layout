@@ -19,7 +19,7 @@ const Header = () => {
             <Button variant="outline" size="sm">Sign in</Button>
           </NavLink>
           <a href="#pricing">
-            <Button variant="accent" size="sm" className="hover-scale">Start hourly access</Button>
+            <Button variant="gradient" size="sm" className="hover-scale">Start hourly access</Button>
           </a>
         </div>
       </div>
