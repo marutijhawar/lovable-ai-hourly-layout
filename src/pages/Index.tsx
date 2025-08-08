@@ -21,12 +21,14 @@ const Index = () => {
   const perHour = useMemo(() => RATES[model], [model]);
   const total = useMemo(() => perHour * hours, [perHour, hours]);
 
+  const gradientVar = model === "openai" ? "var(--gradient-openai)" : model === "claude" ? "var(--gradient-claude)" : "var(--gradient-both)";
+
   const onStart = useCallback(() => {
     // Hook up to checkout or auth flow here
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen" style={{ background: gradientVar }}>
       <Header />
       <main>
         <Hero
