@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { useToast } from "@/hooks/use-toast";
+import MorphingTorusBackground from "@/components/scene/MorphingTorus";
 import { ChevronUp, ChevronDown } from "lucide-react";
 
 export type ModelOption = "openai" | "claude" | "both";
@@ -31,13 +32,8 @@ const Hero = ({ model, setModel, hours, setHours, perHour, total, onStart }: Her
   };
 
   return (
-    <section className="relative overflow-hidden border-b" style={{ background: gradientVar }}>
-      {/* Ambient gradient */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-24 right-[-10%] h-72 w-72 rounded-full blur-3xl" style={{ background: "var(--gradient-primary)" }} />
-        <div className="absolute -bottom-24 left-[-10%] h-72 w-72 rounded-full blur-3xl" style={{ background: "var(--gradient-primary)" }} />
-      </div>
-
+    <section className="relative overflow-hidden border-b min-h-[100svh] flex items-center" style={{ background: gradientVar }}>
+      <MorphingTorusBackground model={model} />
       <div className="container mx-auto py-16 md:py-24">
         <div className="mx-auto max-w-3xl text-center animate-fade-in text-primary-foreground">
           <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">
