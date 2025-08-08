@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { useToast } from "@/hooks/use-toast";
+import { ChevronUp, ChevronDown } from "lucide-react";
 
 export type ModelOption = "openai" | "claude" | "both";
 
@@ -76,16 +77,40 @@ const Hero = ({ model, setModel, hours, setHours, perHour, total, onStart }: Her
                     aria-label="Select hours"
                   />
                 </div>
-                <Input
-                  type="number"
-                  inputMode="numeric"
-                  min={1}
-                  max={20}
-                  value={hours}
-                  onChange={(e) => setHours(Math.max(1, Math.min(20, Number(e.target.value) || 1)))}
-                  className="w-24 text-center bg-background/90 text-foreground shadow-sm backdrop-blur-sm"
-                  aria-label="Hours"
-                />
+                <div className="relative">
+                  <Input
+                    type="number"
+                    inputMode="numeric"
+                    min={1}
+                    max={20}
+                    value={hours}
+                    onChange={(e) => setHours(Math.max(1, Math.min(20, Number(e.target.value) || 1)))}
+                    className="w-24 text-center bg-background/90 text-foreground shadow-sm backdrop-blur-sm pr-10"
+                    aria-label="Hours"
+                  />
+                  <div className="pointer-events-auto absolute inset-y-0 right-1 my-1 flex flex-col gap-1">
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      size="icon"
+                      className="h-5 w-5"
+                      onClick={() => setHours(Math.min(20, hours + 1))}
+                      aria-label="Increase hours"
+                    >
+                      <ChevronUp className="h-3 w-3" />
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      size="icon"
+                      className="h-5 w-5"
+                      onClick={() => setHours(Math.max(1, hours - 1))}
+                      aria-label="Decrease hours"
+                    >
+                      <ChevronDown className="h-3 w-3" />
+                    </Button>
+                  </div>
+                </div>
               </div>
             </div>
 
