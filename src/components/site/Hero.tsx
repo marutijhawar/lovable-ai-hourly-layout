@@ -1,0 +1,110 @@
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Slider } from "@/components/ui/slider";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { useToast } from "@/hooks/use-toast";
+
+export type ModelOption = "openai" | "claude" | "both";
+
+interface HeroProps {
+  model: ModelOption;
+  setModel: (m: ModelOption) => void;
+  hours: number;
+  setHours: (n: number) => void;
+  perHour: number;
+  total: number;
+  onStart: () => void;
+}
+
+const Hero = ({ model, setModel, hours, setHours, perHour, total, onStart }: HeroProps) => {
+  const { toast } = useToast();
+
+  const handleStart = () => {
+    toast({
+      title: "Starting hourly access",
+      description: `Model: ${model.toUpperCase()} • ${hours}h • Est. $${total.toFixed(2)}`,
+    });
+    onStart();
+  };
+
+  return (
+    <section className="relative overflow-hidden border-b">
+      {/* Ambient gradient */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute -top-24 right-[-10%] h-72 w-72 rounded-full blur-3xl" style={{ background: "var(--gradient-primary)" }} />
+        <div className="absolute -bottom-24 left-[-10%] h-72 w-72 rounded-full blur-3xl" style={{ background: "var(--gradient-primary)" }} />
+      </div>
+
+      <div className="container mx-auto py-16 md:py-24">
+        <div className="mx-auto max-w-3xl text-center animate-fade-in">
+          <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">
+            Hourly AI access to OpenAI and Claude—no commitments.
+          </h1>
+          <p className="mt-4 text-lg text-muted-foreground">
+            Pay only for the time you use. Switch models anytime with transparent pricing.
+          </p>
+
+          <div className="mt-8 grid gap-4 rounded-lg border bg-card/50 p-4 md:p-6">
+            <div className="flex flex-col items-center justify-center gap-3 md:flex-row">
+              <ToggleGroup
+                type="single"
+                value={model}
+                onValueChange={(v) => v && setModel(v as ModelOption)}
+                className=""
+              >
+                <ToggleGroupItem value="openai" aria-label="Choose OpenAI">
+                  OpenAI
+                </ToggleGroupItem>
+                <ToggleGroupItem value="claude" aria-label="Choose Claude">
+                  Claude
+                </ToggleGroupItem>
+                <ToggleGroupItem value="both" aria-label="Choose both">
+                  Both
+                </ToggleGroupItem>
+              </ToggleGroup>
+
+              <div className="flex items-center gap-3">
+                <div className="w-48">
+                  <Slider
+                    min={1}
+                    max={20}
+                    step={1}
+                    value={[hours]}
+                    onValueChange={(v) => setHours(v[0])}
+                    aria-label="Select hours"
+                  />
+                </div>
+                <Input
+                  type="number"
+                  inputMode="numeric"
+                  min={1}
+                  max={20}
+                  value={hours}
+                  onChange={(e) => setHours(Math.max(1, Math.min(20, Number(e.target.value) || 1)))}
+                  className="w-20 text-center"
+                  aria-label="Hours"
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-col items-center justify-center gap-3 md:flex-row">
+              <div className="text-sm text-muted-foreground">
+                Est. total: <span className="font-medium text-foreground">${total.toFixed(2)}</span> • Rate: ${perHour.toFixed(2)}/hr
+              </div>
+              <div className="flex gap-3">
+                <Button variant="accent" size="lg" className="hover-scale" onClick={handleStart}>
+                  Start for ${perHour.toFixed(2)}/hr
+                </Button>
+                <a href="#compare">
+                  <Button variant="outline" size="lg">Compare models</Button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Hero;
