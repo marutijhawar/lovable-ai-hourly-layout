@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <footer id="support" className="border-t">
-      <div className="container mx-auto py-12">
+      <div className="container mx-auto py-12 glass-card">
         <div className="grid gap-8 md:grid-cols-4">
           <div>
             <div className="font-semibold">Product</div>
